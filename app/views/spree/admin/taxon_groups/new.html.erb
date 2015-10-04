@@ -1,0 +1,5 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:new_taxon_group, scope: :taxon_group) %>
+<% end %>
+
+<%= render 'form', resource: @taxon_group %>

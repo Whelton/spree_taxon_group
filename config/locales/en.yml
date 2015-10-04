@@ -1,0 +1,18 @@
+---
+en:
+  activerecord:
+    attributes:
+      spree/taxon_group:
+        name: Taxon Group
+    models:
+      spree/taxon_group:
+        one: Taxon Group
+        other: Taxon Groups
+  spree:
+    admin:
+      tab:
+        taxon_groups: Taxon Groups
+    new_taxon_group: "New Taxon Group"
+    edit_taxon_group: "Edit Taxon Group"
+    taxon_count: "Taxon Count"
+    shop_by_taxon_group: Shop by %{taxon_group}
