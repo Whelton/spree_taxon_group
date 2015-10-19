@@ -38,7 +38,7 @@ or for more control, without `taxon_group_tree`:
 Add to your `Gemfile`:
 
 ```ruby
-gem 'spree_taxon_group', '~> 3.1', '>= 3.1.0.beta'
+gem 'spree_taxon_group', '3.1.0.beta'
 ```
 
 Run:
