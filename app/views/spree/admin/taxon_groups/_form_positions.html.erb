@@ -19,7 +19,7 @@
             <tr id="<%= spree_dom_id(membership) %>" data-hook="taxons_row">
               <td class="move-handle">
                 <span class="icon icon-sort handle" style="cursor: pointer"></span>
-                <%=  hidden_field_tag('taxon_group_membership[position]['+membership.id.to_s+']') %>
+                <%=  hidden_field_tag('taxon_group_membership[position]['+membership.id.to_s+']', membership.position) %>
               </td>
               <td><%= membership.taxon.name %></td>
               <td><%= taxon_path membership.taxon %></td>

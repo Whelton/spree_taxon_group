@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class TaxonGroupsController < ResourceController
-      before_action :load_taxons, only: [:new, :edit]
+      before_action :load_taxons, only: [:new, :edit, :create]
       before_action :load_taxon_group, only: [:update_positions]
 
       def positions
