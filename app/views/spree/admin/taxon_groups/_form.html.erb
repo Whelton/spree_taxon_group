@@ -25,7 +25,7 @@
         <tbody>
           <% @taxons.each do |taxon| %>
             <tr id="<%= spree_dom_id(taxon) %>" data-hook="taxons_row">
-              <td><%= check_box_tag("taxon_group[taxon_ids][]", taxon.id, taxon.id.in?(resource.taxons.pluck(:id))) %></td>
+              <td><%= check_box_tag('taxon_group[taxon_ids][]', taxon.id, taxon.id.in?(resource.taxons.pluck(:id))) %></td>
               <td><%= taxon.name %></td>
               <td><%= taxon_path taxon %></td>
             </tr>
@@ -42,12 +42,12 @@
     $(function() {
       // Checks a taxon's row checkbox on click
       $('[data-hook="taxons_row"]').on('click', function(e) {
-
+        // If checkbox, do nothing (prevent double select)
         if ($(event.target).context.type == 'checkbox' ) {
-          return; // Do nothing (checkbox)
+          return;
         }
-
-        var checkbox = $(this).children('td:first').children('input');
+        //debugger;
+        var checkbox = $(this).find('input:checkbox');
         checkbox.prop("checked", !checkbox.prop("checked"));
       });
     });

@@ -12,7 +12,15 @@
         <td><%= taxon_group.name %></td>
         <td><%= taxon_group.taxons.count %></td>
         <td class="actions actions-2 text-right">
+          <!-- Edit -->
           <%= link_to_edit taxon_group.id, no_text: true %>
+
+          <!-- Positions -->
+          <%= link_to positions_admin_taxon_group_path(taxon_group.id), class: 'btn btn-default btn-sm icon-link with-tip action-positions no-text', 'data-original-title': 'Edit' do %>
+            <span class="icon icon-sort"></span>
+          <% end %>
+
+          <!-- Delete -->
           <%= link_to_delete taxon_group, no_text: true %>
         </td>
       </tr>

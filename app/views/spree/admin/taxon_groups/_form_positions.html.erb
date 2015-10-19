@@ -1,0 +1,56 @@
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:back_to_resource_list, resource: plural_resource_name(Spree::TaxonGroup)), spree.admin_taxon_groups_path, icon: 'arrow-left', class: 'btn-primary' %>
+<% end %>
+
+<%= form_for [:admin, resource], url: positions_admin_taxon_group_path(resource.id) do |f| %>
+
+  <div class="row" data-hook="admin_page_form_fields">
+    <div class="form-group">
+      <table class="table table-hover">
+        <thead>
+          <tr data-hook="taxons_header">
+            <th></th>
+            <th><%= Spree.t(:taxon_name) %></th>
+            <th><%= Spree.t(:path) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @taxon_group_memberships.each do |membership| %>
+            <tr id="<%= spree_dom_id(membership) %>" data-hook="taxons_row">
+              <td class="move-handle">
+                <span class="icon icon-sort handle" style="cursor: pointer"></span>
+                <%=  hidden_field_tag('taxon_group_membership[position]['+membership.id.to_s+']') %>
+              </td>
+              <td><%= membership.taxon.name %></td>
+              <td><%= taxon_path membership.taxon %></td>
+            </tr>
+          <% end %>
+          <% if @taxon_group_memberships.empty? %>
+            <tr data-hook="taxons_none"><td colspan="3"><%= Spree.t(:none) %>.</td></tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="form-actions" data-hook="buttons">
+    <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success'} %>
+    <span class="or"><%= Spree.t(:or) %></span>
+    <%= button_link_to Spree.t('actions.cancel'), collection_url, :icon => 'delete' %>
+  </div>
+
+  <script>
+    $(function() {
+      // Make the tablesortable (with updating the position field)
+      $('tbody').sortable({
+        handle: '.handle',
+        update: function(event, ui) {
+          $.each($("tbody input"), function(position){
+            $(this).val(position);
+          });
+        }
+      });
+    });
+  </script>
+
+<% end %>

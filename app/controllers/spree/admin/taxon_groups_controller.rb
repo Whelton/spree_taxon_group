@@ -2,16 +2,36 @@ module Spree
   module Admin
     class TaxonGroupsController < ResourceController
       before_action :load_taxons, only: [:new, :edit]
+      before_action :load_taxon_group, only: [:update_positions]
 
-      def edit
-        # Sort taxons based on if taxon is in taxon group's taxons
-        @taxons = @taxons.sort_by{|taxon| taxon.id.in?(@taxon_group.taxon_ids) ? 0 : 1}
+      def positions
+        @taxon_group_memberships = @taxon_group.taxon_group_memberships.order(:position)
+      end
+
+      def update_positions
+        update_positions_params.each do |id, position|
+          Spree::TaxonGroupMembership.update(id, position: position)
+        end
+
+        flash[:success] = flash_message_for(@taxon_group, :successfully_updated)
+        respond_with(@taxon_group) do |format|
+          format.html { redirect_to positions_admin_taxon_group_url(@taxon_group) }
+          format.json { render json: @taxon_group.to_json }
+        end
       end
 
       private
 
       def load_taxons
         @taxons = Spree::Taxon.all
+      end
+
+      def load_taxon_group
+        @taxon_group = Spree::TaxonGroup.find(params[:id])
+      end
+
+      def update_positions_params
+        params.require(:taxon_group_membership).require(:position)
       end
     end
   end
