@@ -2,6 +2,7 @@
   <thead>
     <tr data-hook="taxon_groups_header">
       <th><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:key) %></th>
       <th><%= Spree.t(:taxon_count) %></th>
       <th class="actions"></th>
     </tr>
@@ -10,6 +11,7 @@
     <% @taxon_groups.each do |taxon_group| %>
       <tr id="<%= spree_dom_id taxon_group %>" data-hook="taxon_groups_row">
         <td><%= taxon_group.name %></td>
+        <td><%= taxon_group.key %></td>
         <td><%= taxon_group.taxons.count %></td>
         <td class="actions actions-2 text-right">
           <!-- Edit -->

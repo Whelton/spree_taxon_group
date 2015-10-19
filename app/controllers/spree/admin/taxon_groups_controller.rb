@@ -9,11 +9,16 @@ module Spree
       end
 
       def update_positions
-        update_positions_params.each do |id, position|
-          Spree::TaxonGroupMembership.update(id, position: position)
+        begin
+          update_positions_params.each do |id, position|
+            Spree::TaxonGroupMembership.update(id, position: position)
+          end
+
+          flash[:success] = flash_message_for(@taxon_group, :successfully_updated)
+        rescue => e
+          flash[:error] = e.message
         end
 
-        flash[:success] = flash_message_for(@taxon_group, :successfully_updated)
         respond_with(@taxon_group) do |format|
           format.html { redirect_to positions_admin_taxon_group_url(@taxon_group) }
           format.json { render json: @taxon_group.to_json }
