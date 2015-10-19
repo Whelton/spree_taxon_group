@@ -11,12 +11,24 @@ If you want a taxon tree, similar to `taxons_tree` in the default spree sidebar.
 
 ```html
 <nav id="featured-categories" class="sidebar-item" data-hook>
-  <% featured = Spree::TaxonGroup.find_by_name('featured') %>
+  <% featured = Spree::TaxonGroup.find_by_key('featured') %>
   <% cache [I18n.locale, featured] do %>
     <h4 class='taxon-group-root'><%= Spree.t(:shop_by_taxon_group, :taxon_group => featured.name) %></h4>
     <%= taxon_group_tree(featured, @taxon) %>
   <% end %>
 </nav>
+```
+
+or for more control, without `taxon_group_tree`:
+
+```html
+<% navigation_taxon_upcase_group = Spree::TaxonGroup.find_by_key('navigation') %>
+<% cache [I18n.locale, navigation_taxon_upcase_group] do %>
+  <%= navigation_taxon_upcase_group.taxons.map do |taxon|
+        '<li class="hidden-lg hidden-md">' + link_to(taxon.name.upcase, seo_url(taxon)) + '</li>'
+      end.join("\n").html_safe
+  %>
+<% end %>
 ```
 
 ---

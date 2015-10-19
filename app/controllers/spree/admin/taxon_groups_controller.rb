@@ -10,10 +10,7 @@ module Spree
 
       def update_positions
         begin
-          update_positions_params.each do |id, position|
-            Spree::TaxonGroupMembership.update(id, position: position)
-          end
-
+          update_taxon_group_memership_positions
           flash[:success] = flash_message_for(@taxon_group, :successfully_updated)
         rescue => e
           flash[:error] = e.message
@@ -33,6 +30,12 @@ module Spree
 
       def load_taxon_group
         @taxon_group = Spree::TaxonGroup.find(params[:id])
+      end
+
+      def update_taxon_group_memership_positions
+        update_positions_params.each do |id, position|
+          Spree::TaxonGroupMembership.update(id, position: position)
+        end
       end
 
       def update_positions_params
