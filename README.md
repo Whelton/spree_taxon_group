@@ -1,6 +1,6 @@
 # Spree Taxon Group
 
-Easily create and manage groups of taxons, irrespective of their parent or children taxons/taxonomies.
+Easily create and manage groups of taxons, irrespective of their parent or children taxons/taxonomies and control the position/order of taxons in their groups.
 Useful if you need flexible taxon usage, for example a group of taxons for featured categories from different parent taxon/taxonomies.
 
 ---
@@ -38,7 +38,7 @@ or for more control, without `taxon_group_tree`:
 Add to your `Gemfile`:
 
 ```ruby
-gem 'spree_taxon_group', github: 'whelton/spree_taxon_group', branch: 'master'
+gem 'spree_taxon_group', '~> 3.1', '>= 3.1.0.beta'
 ```
 
 Run:
